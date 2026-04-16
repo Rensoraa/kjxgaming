@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KjxGaming | Portfolio</title>
+  <meta name="description" content="Kjelle aka KjxGaming — Belgian gamer with Portuguese roots.">
+  <meta name="theme-color" content="#0f0f0f">
+
+  <link rel="icon" href="favicon.ico">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="nav-inner">
+
+      <a href="#" class="brand">
+        <span class="brand-dot"></span>
+        KjxGaming
+      </a>
+
+      <nav class="menu">
+        <a href="#about" class="glow-btn small">About</a>
+        <a href="#valorant" class="glow-btn small">Valorant</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="page-wrap">
+
+    <!-- Hero -->
+    <section class="glass hero card-hero">
+      <h1 class="glossy-title"> <center>KjxGaming</center></h1>
+      
+    </section>
+
+    <!-- About -->
+    <section id="about" class="glass section hover-card">
+      <h2 class="section-title"><center>About Me</center></h2>
+
+      <p class="section-desc">
+        Hey, I'm <strong>Kjelle</strong>. online you'll know me as <strong>KjxGaming</strong>.
+        I'm a 19-year-old gamer from Belgium with Portuguese roots. Gaming isn't just something
+        I do; it's the grind, the growth, and the good times.
+      </p>
+
+      <div class="about-tags">
+        <span class="about-tag">🇧🇪 Belgium</span>
+        <span class="about-tag">🇵🇹 Portuguese roots</span>
+        <span class="about-tag">19 y/o</span>
+      </div>
+
+      <div class="two-col" style="margin-top: 1.2rem;">
+        <div class="about-blob">
+          <h3>Games I Play</h3>
+          <p>Valorant, FIFA, Call of Duty, Fortnite <br>&amp; many more.</p>
+        </div>
+
+        <div class="about-blob">
+          <h3>My Goals</h3>
+          <p>Keep improving where I'm grinding, and maintain the level in what I've mastered.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Valorant -->
+    <section id="valorant" class="glass section hover-card">
+      <h2 class="section-title">Valorant Ranked</h2>
+      <p class="section-desc">Live data powered by HenrikDev API</p>
+
+      <div id="valo-data" style="margin-top:14px;">
+        <p style="color:#888;">Loading stats...</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner glass">
+      <p>&copy; 2026 KjxGaming</p>
+      <i>This Page is provided and powered by <a href="https://rensors.online" target="_blank">Rensorsa</a></i>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const RANK_IMAGE_BASE = "https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/";
+
+    async function loadValorant() {
+      const container = document.getElementById('valo-data');
+
+      try {
+        const res = await fetch(
+          'https://api.henrikdev.xyz/valorant/v2/mmr/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df'
+        );
+        const json = await res.json();
+
+        if (!json.data || !json.data.current_data) {
+          container.innerHTML = '<p style="color:#888;">No data found.</p>';
+          return;
+        }
+
+        const d         = json.data.current_data;
+        const tier      = d.currenttier;
+        const rankName  = d.currenttierpatched;
+        const rr        = d.ranking_in_tier;
+        const rrChange  = d.mmr_change_to_last_game;
+        const elo       = d.elo;
+        const imgUrl    = `${RANK_IMAGE_BASE}${tier}/largeicon.png`;
+
+        const highest   = json.data.highest_rank;
+        const peakName  = highest ? highest.patched_tier : '—';
+        const SEASON_START_EPISODE = 10;   // e10a1 = Season 25 Act I
+        const SEASON_BASE = 25;            // starting season number
+        const peakSeason = highest ? (() => {
+            const match = highest.season.match(/^e(\d+)a(\d+)$/);
+            if (!match) return highest.season.toUpperCase();
+
+            const episode = parseInt(match[1], 10);
+            const act = parseInt(match[2], 10);
+
+            // before season system
+            if (episode < SEASON_START_EPISODE) {
+                return `Episode ${episode} Act ${act}`;
+            }
+
+            // season system starts at e10a1 = Season 25 Act 1
+            const season = SEASON_BASE + (episode - SEASON_START_EPISODE);
+
+            return `Season ${season} Act ${act}`;
+            })() : '';
+
+        const changeColor = rrChange > 0 ? '#4ade80' : rrChange < 0 ? '#f87171' : '#aaa';
+        const changeSign  = rrChange > 0 ? '+' : '';
+
+        container.innerHTML = `
+          <div class="valo-card">
+            <img class="valo-rank-img" src="${imgUrl}" alt="${rankName}" />
+            <div class="valo-info">
+              <div class="valo-rank-name">${rankName}</div>
+              <div class="valo-rr-bar-wrap">
+                <div class="valo-rr-bar" style="width: ${rr}%"></div>
+              </div>
+              <div class="valo-stats-row">
+                <span class="valo-stat"><span class="valo-stat-label">RR</span> ${rr}<span style="color:#888">/100</span></span>
+                <span class="valo-stat"><span class="valo-stat-label">Last game</span> <span style="color:${changeColor}">${changeSign}${rrChange} RR</span></span>
+                <span class="valo-stat"><span class="valo-stat-label">ELO</span> ${elo}</span>
+              </div>
+              <div class="valo-peak">Peak: <strong>${peakName}</strong> <span style="color:#888;font-size:0.78rem;">${peakSeason}</span></div>
+            </div>
+          </div>
+        `;
+
+      } catch (e) {
+        container.innerHTML = '<p style="color:#888;">API error or rate limited — try again later.</p>';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadValorant);
+  </script>
+
+</body>
+</html>
