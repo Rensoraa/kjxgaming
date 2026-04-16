@@ -129,24 +129,8 @@
   <script>
     /* ── Constants ─────────────────────────────────────── */
     const RANK_IMAGE_BASE = "https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/";
-    const SEASON_MAP = {
-      'e1a1':'Episode 1 Act I','e1a2':'Episode 1 Act II','e1a3':'Episode 1 Act III',
-      'e2a1':'Episode 2 Act I','e2a2':'Episode 2 Act II','e2a3':'Episode 2 Act III',
-      'e3a1':'Episode 3 Act I','e3a2':'Episode 3 Act II','e3a3':'Episode 3 Act III',
-      'e4a1':'Episode 4 Act I','e4a2':'Episode 4 Act II','e4a3':'Episode 4 Act III',
-      'e5a1':'Episode 5 Act I','e5a2':'Episode 5 Act II','e5a3':'Episode 5 Act III',
-      'e6a1':'Episode 6 Act I','e6a2':'Episode 6 Act II','e6a3':'Episode 6 Act III',
-      'e7a1':'Episode 7 Act I','e7a2':'Episode 7 Act II','e7a3':'Episode 7 Act III',
-      'e8a1':'Episode 8 Act I','e8a2':'Episode 8 Act II','e8a3':'Episode 8 Act III',
-      'e9a1':'Episode 9 Act I','e9a2':'Episode 9 Act II','e9a3':'Episode 9 Act III',
-      'e10a1':'Episode 10 Act I','e10a2':'Episode 10 Act II','e10a3':'Episode 10 Act III',
-      'e11a1':'Episode 11 Act I','e11a2':'Episode 11 Act II','e11a3':'Episode 11 Act III',
-      'e11a4':'V25 Act I','e11a5':'V25 Act II','e11a6':'V25 Act III',
-      'e12a1':'V25 Act IV','e12a2':'V25 Act V','e12a3':'V25 Act VI',
-      'e12a4':'V26 Act I','e12a5':'V26 Act II','e12a6':'V26 Act III',
-      'e13a1':'V26 Act IV','e13a2':'V26 Act V','e13a3':'V26 Act VI',
-    };
-
+    const SEASON_START_EPISODE = 10;   // e10a1 = Season 25 Act I
+    const SEASON_BASE = 25;            // starting season number
     /* ── MMR / Rank card ───────────────────────────────── */
     async function loadValorant() {
       const container = document.getElementById('valo-data');
@@ -168,7 +152,23 @@
         const imgUrl     = `${RANK_IMAGE_BASE}${tier}/largeicon.png`;
         const highest    = json.data.highest_rank;
         const peakName   = highest ? highest.patched_tier : '—';
-        const peakSeason = highest ? (SEASON_MAP[highest.season] || highest.season.toUpperCase()) : '';
+        const peakSeason = highest ? (() => {
+        const match = highest.season.match(/^e(\d+)a(\d+)$/);
+        if (!match) return highest.season.toUpperCase();
+
+        const episode = parseInt(match[1], 10);
+        const act = parseInt(match[2], 10);
+
+        // before season system
+        if (episode < SEASON_START_EPISODE) {
+          return `Episode ${episode} Act ${act}`;
+        }
+
+        // season system starts at e10a1 = Season 25 Act 1
+        const season = SEASON_BASE + (episode - SEASON_START_EPISODE);
+
+        return `Season ${season} Act ${act}`;
+      })() : ''; 
         const changeColor = rrChange > 0 ? '#4ade80' : rrChange < 0 ? '#f87171' : '#aaa';
         const changeSign  = rrChange > 0 ? '+' : '';
 
