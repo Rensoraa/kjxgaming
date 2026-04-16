@@ -122,6 +122,7 @@ body::after {
   background: linear-gradient(120deg, transparent, rgba(255,0,0,0.5), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .hover-card:hover::before {
@@ -229,7 +230,7 @@ body::after {
 }
 
 /* =========================
-   ABOUT TAGS (new)
+   ABOUT TAGS
 ========================= */
 .about-tags {
   display: flex;
@@ -267,7 +268,7 @@ body::after {
 }
 
 /* =========================
-   VALORANT CARD
+   VALORANT RANK CARD
 ========================= */
 .valo-card {
   display: flex;
@@ -346,6 +347,91 @@ body::after {
 }
 
 /* =========================
+   MATCHES COLLAPSIBLE PANEL
+========================= */
+#matches-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 0;
+}
+
+#matches-wrap.open {
+  grid-template-rows: 1fr;
+  margin-top: 1rem;
+}
+
+#matches-inner {
+  overflow: hidden;
+}
+
+/* =========================
+   MATCH ROWS
+========================= */
+.match-header,
+.match-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 1fr 1fr 64px 52px;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.82rem;
+}
+
+.match-header {
+  color: #666;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 0.2rem;
+}
+
+.match-row {
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.match-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.match-result {
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+.match-map {
+  color: #ddd;
+  font-weight: 500;
+}
+
+.match-agent {
+  color: #aaa;
+}
+
+.match-kda {
+  color: #ccc;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.match-acs {
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.match-date {
+  color: #666;
+  font-size: 0.75rem;
+  text-align: right;
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 520px) {
@@ -366,5 +452,13 @@ body::after {
   .valo-rank-img {
     width: 70px;
     height: 70px;
+  }
+
+  .match-header,
+  .match-row {
+    grid-template-columns: 44px 1fr 1fr 1fr 54px 44px;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.4rem;
+    gap: 0.3rem;
   }
 }

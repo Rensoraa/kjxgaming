@@ -5,20 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta property="og:title" content="KjxGaming's Hub" />
-    <meta property="og:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
-    <meta property="og:image" content="https://kjxgaming.rensora.online/favicon.png" />
-    <meta property="og:url" content="https://kjxgaming.rensora.online" />
-    <meta property="og:type" content="website" />
+  <meta property="og:title" content="KjxGaming's Hub" />
+  <meta property="og:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
+  <meta property="og:image" content="https://kjxgaming.rensora.online/favicon.png" />
+  <meta property="og:url" content="https://kjxgaming.rensora.online" />
+  <meta property="og:type" content="website" />
 
-            <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="KjxGaming's Hub" />
-        <meta name="twitter:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
-        <meta name="twitter:image" content="https://kjxgaming.rensora.online/favicon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="KjxGaming's Hub" />
+  <meta name="twitter:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
+  <meta name="twitter:image" content="https://kjxgaming.rensora.online/favicon.png" />
 
   <title>KjxGaming</title>
-    <meta name="description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots.">
-    <meta name="theme-color" content="#a60827">
+  <meta name="description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots.">
+  <meta name="theme-color" content="#a60827">
 
   <link rel="icon" href="favicon.png" type="image/x-icon">
 
@@ -36,17 +36,14 @@
   <!-- Header -->
   <header class="site-header">
     <div class="nav-inner">
-
       <a href="#" class="brand">
         <span class="brand-dot"></span>
         KjxGaming
       </a>
-
       <nav class="menu">
         <a href="#about" class="glow-btn small">About</a>
         <a href="#valorant" class="glow-btn small">Valorant</a>
       </nav>
-
     </div>
   </header>
 
@@ -55,8 +52,7 @@
 
     <!-- Hero -->
     <section class="glass hero card-hero">
-      <h1 class="glossy-title"> <center>KjxGaming</center></h1>
-      
+      <h1 class="glossy-title"><center>KjxGaming</center></h1>
     </section>
 
     <!-- About -->
@@ -64,7 +60,7 @@
       <h2 class="section-title"><center>About Me</center></h2>
 
       <p class="section-desc">
-        Hey, I'm <strong>Kjelle</strong>. online you'll know me as <strong>KjxGaming</strong>.
+        Hey, I'm <strong>Kjelle</strong>. Online you'll know me as <strong>KjxGaming</strong>.
         I'm a 19-year-old gamer from Belgium with Portuguese roots. Gaming isn't just something
         I do; it's the grind, the growth, and the good times.
       </p>
@@ -80,7 +76,6 @@
           <h3>Games I Play</h3>
           <p>Valorant, FIFA, Call of Duty, Fortnite <br>&amp; many more.</p>
         </div>
-
         <div class="about-blob">
           <h3>My Goals</h3>
           <p>Keep improving where I'm grinding, and maintain the level in what I've mastered.</p>
@@ -93,9 +88,32 @@
       <h2 class="section-title">Valorant Ranked</h2>
       <p class="section-desc">Live data powered by HenrikDev API</p>
 
+      <!-- Rank card -->
       <div id="valo-data" style="margin-top:14px;">
         <p style="color:#888;">Loading stats...</p>
       </div>
+
+      <!-- Toggle button -->
+      <div style="margin-top:1rem; text-align:center;">
+        <button class="glow-btn small" id="matches-toggle-btn" onclick="toggleMatches()">
+          &#9654;&nbsp; Display Matches
+        </button>
+      </div>
+
+      <!-- Collapsible matches panel -->
+      <div id="matches-wrap">
+        <div id="matches-inner">
+          <div id="matches-data"></div>
+          <div style="text-align:center; margin-top:1.2rem;">
+            <a
+              href="https://tracker.gg/valorant/profile/riot/KJxGaming%23Echo/overview?platform=pc&playlist=competitive&season=9d85c932-4820-c060-09c3-668636d4df1b"
+              target="_blank"
+              class="glow-btn small"
+            >View All Stats &nbsp;&#8599;</a>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main>
@@ -108,17 +126,32 @@
     </div>
   </footer>
 
-  <!-- Script -->
   <script>
+    /* ── Constants ─────────────────────────────────────── */
     const RANK_IMAGE_BASE = "https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/";
+    const SEASON_MAP = {
+      'e1a1':'Episode 1 Act I','e1a2':'Episode 1 Act II','e1a3':'Episode 1 Act III',
+      'e2a1':'Episode 2 Act I','e2a2':'Episode 2 Act II','e2a3':'Episode 2 Act III',
+      'e3a1':'Episode 3 Act I','e3a2':'Episode 3 Act II','e3a3':'Episode 3 Act III',
+      'e4a1':'Episode 4 Act I','e4a2':'Episode 4 Act II','e4a3':'Episode 4 Act III',
+      'e5a1':'Episode 5 Act I','e5a2':'Episode 5 Act II','e5a3':'Episode 5 Act III',
+      'e6a1':'Episode 6 Act I','e6a2':'Episode 6 Act II','e6a3':'Episode 6 Act III',
+      'e7a1':'Episode 7 Act I','e7a2':'Episode 7 Act II','e7a3':'Episode 7 Act III',
+      'e8a1':'Episode 8 Act I','e8a2':'Episode 8 Act II','e8a3':'Episode 8 Act III',
+      'e9a1':'Episode 9 Act I','e9a2':'Episode 9 Act II','e9a3':'Episode 9 Act III',
+      'e10a1':'Episode 10 Act I','e10a2':'Episode 10 Act II','e10a3':'Episode 10 Act III',
+      'e11a1':'Episode 11 Act I','e11a2':'Episode 11 Act II','e11a3':'Episode 11 Act III',
+      'e11a4':'V25 Act I','e11a5':'V25 Act II','e11a6':'V25 Act III',
+      'e12a1':'V25 Act IV','e12a2':'V25 Act V','e12a3':'V25 Act VI',
+      'e12a4':'V26 Act I','e12a5':'V26 Act II','e12a6':'V26 Act III',
+      'e13a1':'V26 Act IV','e13a2':'V26 Act V','e13a3':'V26 Act VI',
+    };
 
+    /* ── MMR / Rank card ───────────────────────────────── */
     async function loadValorant() {
       const container = document.getElementById('valo-data');
-
       try {
-        const res = await fetch(
-          'https://api.henrikdev.xyz/valorant/v2/mmr/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df'
-        );
+        const res  = await fetch('https://api.henrikdev.xyz/valorant/v2/mmr/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df');
         const json = await res.json();
 
         if (!json.data || !json.data.current_data) {
@@ -126,36 +159,16 @@
           return;
         }
 
-        const d         = json.data.current_data;
-        const tier      = d.currenttier;
-        const rankName  = d.currenttierpatched;
-        const rr        = d.ranking_in_tier;
-        const rrChange  = d.mmr_change_to_last_game;
-        const elo       = d.elo;
-        const imgUrl    = `${RANK_IMAGE_BASE}${tier}/largeicon.png`;
-
-        const highest   = json.data.highest_rank;
-        const peakName  = highest ? highest.patched_tier : '—';
-        const SEASON_START_EPISODE = 10;   // e10a1 = Season 25 Act I
-        const SEASON_BASE = 25;            // starting season number
-        const peakSeason = highest ? (() => {
-            const match = highest.season.match(/^e(\d+)a(\d+)$/);
-            if (!match) return highest.season.toUpperCase();
-
-            const episode = parseInt(match[1], 10);
-            const act = parseInt(match[2], 10);
-
-            // before season system
-            if (episode < SEASON_START_EPISODE) {
-                return `Episode ${episode} Act ${act}`;
-            }
-
-            // season system starts at e10a1 = Season 25 Act 1
-            const season = SEASON_BASE + (episode - SEASON_START_EPISODE);
-
-            return `Season ${season} Act ${act}`;
-            })() : '';
-
+        const d          = json.data.current_data;
+        const tier       = d.currenttier;
+        const rankName   = d.currenttierpatched;
+        const rr         = d.ranking_in_tier;
+        const rrChange   = d.mmr_change_to_last_game;
+        const elo        = d.elo;
+        const imgUrl     = `${RANK_IMAGE_BASE}${tier}/largeicon.png`;
+        const highest    = json.data.highest_rank;
+        const peakName   = highest ? highest.patched_tier : '—';
+        const peakSeason = highest ? (SEASON_MAP[highest.season] || highest.season.toUpperCase()) : '';
         const changeColor = rrChange > 0 ? '#4ade80' : rrChange < 0 ? '#f87171' : '#aaa';
         const changeSign  = rrChange > 0 ? '+' : '';
 
@@ -176,9 +189,105 @@
             </div>
           </div>
         `;
-
       } catch (e) {
         container.innerHTML = '<p style="color:#888;">API error or rate limited — try again later.</p>';
+      }
+    }
+
+    /* ── Match history ─────────────────────────────────── */
+    let matchesLoaded = false;
+    let matchesOpen   = false;
+
+    async function loadMatches() {
+      const container = document.getElementById('matches-data');
+      container.innerHTML = '<p style="color:#888; font-size:0.85rem; padding:0.6rem 0;">Loading matches…</p>';
+
+      try {
+        const res  = await fetch('https://api.henrikdev.xyz/valorant/v3/matches/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df');
+        const json = await res.json();
+
+        if (!json.data) {
+          container.innerHTML = '<p style="color:#888;">No match data found.</p>';
+          return;
+        }
+
+        /* filter competitive only, max 10 */
+        const matches = json.data
+          .filter(m => m.metadata.mode === 'Competitive')
+          .slice(0, 10);
+
+        if (!matches.length) {
+          container.innerHTML = '<p style="color:#888;">No competitive matches found.</p>';
+          return;
+        }
+
+        const rows = matches.map(m => {
+          const meta = m.metadata;
+          const me   = m.players.all_players.find(p =>
+            p.name.toLowerCase() === 'kjxgaming' ||
+            p.puuid === '291f6370-dcb8-5332-b71f-088671d896b5'
+          );
+
+          const myTeam     = me ? me.team.toLowerCase() : null;
+          const won        = myTeam && m.teams[myTeam] ? m.teams[myTeam].has_won : null;
+          const result     = won === true ? 'WIN' : won === false ? 'LOSS' : '—';
+          const resultColor = result === 'WIN' ? '#4ade80' : result === 'LOSS' ? '#f87171' : '#aaa';
+
+          const kda   = me ? `${me.stats.kills} / ${me.stats.deaths} / ${me.stats.assists}` : '— / — / —';
+          const agent = me ? me.character : '—';
+          const acs   = me && meta.rounds_played > 0
+            ? Math.round(me.stats.score / meta.rounds_played)
+            : '—';
+
+          const date    = new Date(meta.game_start * 1000);
+          const dateStr = date.toLocaleDateString('en-GB', { day:'2-digit', month:'short' });
+
+          return `
+            <div class="match-row">
+              <span class="match-result" style="color:${resultColor}">${result}</span>
+              <span class="match-map">${meta.map}</span>
+              <span class="match-agent">${agent}</span>
+              <span class="match-kda">${kda}</span>
+              <span class="match-acs"><span class="valo-stat-label">ACS</span>&nbsp;${acs}</span>
+              <span class="match-date">${dateStr}</span>
+            </div>
+          `;
+        }).join('');
+
+        container.innerHTML = `
+          <div class="match-header">
+            <span>Result</span>
+            <span>Map</span>
+            <span>Agent</span>
+            <span>K / D / A</span>
+            <span>ACS</span>
+            <span>Date</span>
+          </div>
+          ${rows}
+        `;
+
+      } catch (e) {
+        container.innerHTML = '<p style="color:#888;">Could not load matches — rate limited or API error.</p>';
+      }
+    }
+
+    /* ── Toggle panel ──────────────────────────────────── */
+    function toggleMatches() {
+      const wrap = document.getElementById('matches-wrap');
+      const btn  = document.getElementById('matches-toggle-btn');
+
+      matchesOpen = !matchesOpen;
+
+      if (matchesOpen) {
+        wrap.classList.add('open');
+        btn.innerHTML = '&#9660;&nbsp; Hide Matches';
+        if (!matchesLoaded) {
+          matchesLoaded = true;
+          loadMatches();
+        }
+      } else {
+        wrap.classList.remove('open');
+        btn.innerHTML = '&#9654;&nbsp; Display Matches';
       }
     }
 
