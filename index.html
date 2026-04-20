@@ -7,14 +7,17 @@
 
   <meta property="og:title" content="KjxGaming's Hub" />
   <meta property="og:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
-  <meta property="og:image" content="https://kjxgaming.rensora.online/favicon_new.png" />
+  <meta property="og:image" content="https://pfpsystem.itsnielsje.workers.dev/">
+
+<!-- Sets the favicon dynamically on page load -->
+<script src="pfp.js"></script>
   <meta property="og:url" content="https://kjxgaming.rensora.online" />
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="KjxGaming's Hub" />
   <meta name="twitter:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
-  <meta name="twitter:image" content="https://kjxgaming.rensora.online/favicon_new.png" />
+  <meta name="twitter:image" content="https://pfpsystem.itsnielsje.workers.dev/">
 
   <title>KjxGaming</title>
   <meta name="description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots.">
@@ -292,6 +295,39 @@
     }
 
     document.addEventListener('DOMContentLoaded', loadValorant);
+
+
+
+
+    // pfp.js — drop this in your <head>
+// Hits the worker, sets favicon on page load.
+// og:image is handled by the static tag below — no JS needed for that.
+
+(function () {
+  fetch("https://pfpsystem.itsnielsje.workers.dev/", {
+    headers: { "Accept": "application/json" }
+  })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data.url) return;
+      var url = data.url;
+
+      function upsert(sel, tag, attrs) {
+        var el = document.querySelector(sel) || document.createElement(tag);
+        Object.keys(attrs).forEach(function (k) {
+          if (k === "href" || k === "content") el[k] = attrs[k];
+          else el.setAttribute(k, attrs[k]);
+        });
+        document.head.appendChild(el);
+      }
+
+      upsert("link[rel='icon']",             "link", { rel: "icon",             type: "image/png", href: url });
+      upsert("link[rel='shortcut icon']",    "link", { rel: "shortcut icon",    type: "image/png", href: url });
+      upsert("link[rel='apple-touch-icon']", "link", { rel: "apple-touch-icon",                   href: url });
+    })
+    .catch(function () { /* silent fail — fallback favicon stays */ });
+})();
+
   </script>
 
 </body>
