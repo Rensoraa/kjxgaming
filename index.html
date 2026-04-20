@@ -296,12 +296,7 @@
 
     document.addEventListener('DOMContentLoaded', loadValorant);
 
-
-
-
-    // pfp.js — drop this in your <head>
-// Hits the worker, sets favicon on page load.
-// og:image is handled by the static tag below — no JS needed for that.
+// Set favicon dynamically from pfp system API 
 
 (function () {
   fetch("https://pfpsystem.itsnielsje.workers.dev/", {
