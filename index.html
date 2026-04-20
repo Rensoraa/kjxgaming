@@ -5,15 +5,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Open Graph -->
   <meta property="og:title" content="KjxGaming's Hub" />
   <meta property="og:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
   <meta property="og:image" content="https://pfpsystem.itsnielsje.workers.dev/">
-
-<!-- Sets the favicon dynamically on page load -->
-<script src="pfp.js"></script>
   <meta property="og:url" content="https://kjxgaming.rensora.online" />
   <meta property="og:type" content="website" />
 
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="KjxGaming's Hub" />
   <meta name="twitter:description" content="On this page you can find all the information about KjxGaming, a passionate gamer from Belgium with Portuguese roots." />
@@ -25,65 +24,98 @@
 
   <link rel="icon" href="favicon_new.png" type="image/x-icon">
 
-  <!-- Fonts -->
+  <!-- Fonts: Bebas Neue (display) · DM Sans (body) · JetBrains Mono (mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- Header -->
+  <!-- ===================== PAGE LOADER ===================== -->
+  <div id="page-loader">
+    <div class="loader-brand">KjxGaming</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar-fill" id="loader-bar"></div>
+    </div>
+    <div class="loader-text" id="loader-status">Initialising…</div>
+  </div>
+
+  <!-- ===================== CANVAS BACKGROUND ===================== -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ===================== HEADER ===================== -->
   <header class="site-header">
     <div class="nav-inner">
+
       <a href="#" class="brand">
         <span class="brand-dot"></span>
         KjxGaming
       </a>
-      <nav class="menu">
-        <a href="#about" class="glow-btn small">About</a>
-        <a href="#valorant" class="glow-btn small">Valorant</a>
-      </nav>
+
+      <!-- Live time comparison: visitor vs Belgium -->
+      <div class="nav-time" id="nav-time">
+        <div class="nav-time-row">
+          <span class="nav-time-label">You</span>
+          <span class="nav-time-value" id="your-time">--:--:--</span>
+        </div>
+        <div class="nav-time-row">
+          <span class="nav-time-label">Kjx</span>
+          <span class="nav-time-value" id="my-time">--:--:--</span>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <nav class="menu">
+          <a href="#about"    class="glow-btn small">About</a>
+          <a href="#valorant" class="glow-btn small">Valorant</a>
+        </nav>
+      </div>
+
     </div>
   </header>
 
-  <!-- Main -->
+  <!-- ===================== MAIN ===================== -->
   <main class="page-wrap">
 
     <!-- Hero -->
-   <div class="hero-pfp-wrap">
-  <div class="hero-pfp-glow"></div>
-  <img id="hero-pfp" src="https://pfpsystem.itsnielsje.workers.dev/" alt="KjxGaming" class="hero-pfp" />
-</div>
-
-<section class="glass hero card-hero">
-  <h1 class="glossy-title"><center>KjxGaming</center></h1>
-</section>
-
-    
-    <!-- About -->
-    <section id="about" class="glass section hover-card">
-      <h2 class="section-title"><center>About Me</center></h2>
-
-      <p class="section-desc">
-        Hey, I'm <strong>Kjelle</strong>. Online you'll know me as <strong>KjxGaming</strong>.
-        I'm a 19-year-old gamer from Belgium with Portuguese roots. Gaming isn't just something
-        I do; it's the grind, the growth, and the good times.
-      </p>
-
-      <div class="about-tags">
-        <span class="about-tag">🇧🇪 Belgium</span>
-        <span class="about-tag">🇵🇹 Portuguese roots</span>
-        <span class="about-tag">19 y/o</span>
+    <div class="hero-wrap animate-in">
+      <div class="hero-pfp-wrap">
+        <div class="hero-pfp-glow"></div>
+        <div class="hero-pfp-ring"></div>
+        <img id="hero-pfp" src="https://pfpsystem.itsnielsje.workers.dev/" alt="KjxGaming" class="hero-pfp" />
       </div>
 
-      <div class="two-col" style="margin-top: 1.2rem;">
+      <div class="glass hero-card">
+        <h1 class="hero-name">KjxGaming</h1>
+        <p class="hero-tagline">Belgian gamer · Portuguese roots · always grinding</p>
+        <div class="hero-divider"></div>
+        <div class="hero-badges">
+          <span class="hero-badge">🇧🇪 Belgium</span>
+          <span class="hero-badge">🇵🇹 Portuguese</span>
+          <span class="hero-badge">19 y/o</span>
+          <span class="hero-badge">VALORANT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about" class="glass hover-card animate-in" style="transition-delay:0.1s">
+      <h2 class="section-title">About Me</h2>
+
+      <p class="about-text">
+        Hey, I'm <strong>Kjelle</strong>. Online you'll know me as <strong>KjxGaming</strong>.
+        I'm a 19-year-old gamer from Belgium with Portuguese roots. Gaming isn't just something
+        I do — it's the grind, the growth, and the good times.
+      </p>
+
+      <div class="two-col">
         <div class="about-blob">
           <h3>Games I Play</h3>
-          <p>Valorant, FIFA, Call of Duty, Fortnite <br>&amp; many more.</p>
+          <p>Valorant, FIFA, Call of Duty, Fortnite &amp; many more.</p>
         </div>
         <div class="about-blob">
           <h3>My Goals</h3>
@@ -93,13 +125,13 @@
     </section>
 
     <!-- Valorant -->
-    <section id="valorant" class="glass section hover-card">
+    <section id="valorant" class="glass hover-card animate-in" style="transition-delay:0.2s">
       <h2 class="section-title">Valorant Ranked</h2>
       <p class="section-desc">Live data powered by HenrikDev API</p>
 
-      <!-- Rank card -->
+      <!-- Rank card (populated by JS) -->
       <div id="valo-data" style="margin-top:14px;">
-        <p style="color:#888;">Loading stats...</p>
+        <p style="color:#555;">Loading stats…</p>
       </div>
 
       <!-- Toggle button -->
@@ -109,227 +141,30 @@
         </button>
       </div>
 
-      <!-- Collapsible matches panel -->
+      <!-- Collapsible match history -->
       <div id="matches-wrap">
         <div id="matches-inner">
           <div id="matches-data"></div>
           <div style="text-align:center; margin-top:1.2rem;">
-            <a
-              href="https://tracker.gg/valorant/profile/riot/KJxGaming%23Echo/overview?platform=pc&playlist=competitive&season=9d85c932-4820-c060-09c3-668636d4df1b"
-              target="_blank"
-              class="glow-btn small"
-            >View All Stats &nbsp;&#8599;</a>
+            <a href="https://tracker.gg/valorant/profile/riot/KJxGaming%23Echo/overview?platform=pc&playlist=competitive&season=9d85c932-4820-c060-09c3-668636d4df1b"
+               target="_blank" class="glow-btn small">View All Stats &nbsp;&#8599;</a>
           </div>
         </div>
       </div>
-
     </section>
 
   </main>
 
-  <!-- Footer -->
+  <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer">
     <div class="footer-inner glass">
       <p>&copy; 2026 KjxGaming</p>
-      <i>This Page is provided and powered by <a href="https://rensora.online" target="_blank">Rensora</a></i>
+      <i>Powered by <a href="https://rensora.online" target="_blank">Rensora</a></i>
     </div>
   </footer>
 
-  <script>
-    /* ── Constants ─────────────────────────────────────── */
-    const RANK_IMAGE_BASE = "https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/";
-    const SEASON_START_EPISODE = 10;   // e10a1 = Season 25 Act I
-    const SEASON_BASE = 25;            // starting season number
-    /* ── MMR / Rank card ───────────────────────────────── */
-    async function loadValorant() {
-      const container = document.getElementById('valo-data');
-      try {
-        const res  = await fetch('https://api.henrikdev.xyz/valorant/v2/mmr/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df');
-        const json = await res.json();
-
-        if (!json.data || !json.data.current_data) {
-          container.innerHTML = '<p style="color:#888;">No data found.</p>';
-          return;
-        }
-
-        const d          = json.data.current_data;
-        const tier       = d.currenttier;
-        const rankName   = d.currenttierpatched;
-        const rr         = d.ranking_in_tier;
-        const rrChange   = d.mmr_change_to_last_game;
-        const elo        = d.elo;
-        const imgUrl     = `${RANK_IMAGE_BASE}${tier}/largeicon.png`;
-        const highest    = json.data.highest_rank;
-        const peakName   = highest ? highest.patched_tier : '—';
-        const peakSeason = highest ? (() => {
-        const match = highest.season.match(/^e(\d+)a(\d+)$/);
-        if (!match) return highest.season.toUpperCase();
-
-        const episode = parseInt(match[1], 10);
-        const act = parseInt(match[2], 10);
-
-        // before season system
-        if (episode < SEASON_START_EPISODE) {
-          return `Episode ${episode} Act ${act}`;
-        }
-
-        // season system starts at e10a1 = Season 25 Act 1
-        const season = SEASON_BASE + (episode - SEASON_START_EPISODE);
-
-        return `Season ${season} Act ${act}`;
-      })() : ''; 
-        const changeColor = rrChange > 0 ? '#4ade80' : rrChange < 0 ? '#f87171' : '#aaa';
-        const changeSign  = rrChange > 0 ? '+' : '';
-
-        container.innerHTML = `
-          <div class="valo-card">
-            <img class="valo-rank-img" src="${imgUrl}" alt="${rankName}" />
-            <div class="valo-info">
-              <div class="valo-rank-name">${rankName}</div>
-              <div class="valo-rr-bar-wrap">
-                <div class="valo-rr-bar" style="width: ${rr}%"></div>
-              </div>
-              <div class="valo-stats-row">
-                <span class="valo-stat"><span class="valo-stat-label">RR</span> ${rr}<span style="color:#888">/100</span></span>
-                <span class="valo-stat"><span class="valo-stat-label">Last game</span> <span style="color:${changeColor}">${changeSign}${rrChange} RR</span></span>
-                <span class="valo-stat"><span class="valo-stat-label">ELO</span> ${elo}</span>
-              </div>
-              <div class="valo-peak">Peak: <strong>${peakName}</strong> <span style="color:#888;font-size:0.78rem;">${peakSeason}</span></div>
-            </div>
-          </div>
-        `;
-      } catch (e) {
-        container.innerHTML = '<p style="color:#888;">API error or rate limited - try again later.</p>';
-      }
-    }
-
-    /* ── Match history ─────────────────────────────────── */
-    let matchesLoaded = false;
-    let matchesOpen   = false;
-
-    async function loadMatches() {
-      const container = document.getElementById('matches-data');
-      container.innerHTML = '<p style="color:#888; font-size:0.85rem; padding:0.6rem 0;">Loading matches…</p>';
-
-      try {
-        const res  = await fetch('https://api.henrikdev.xyz/valorant/v3/matches/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df');
-        const json = await res.json();
-
-        if (!json.data) {
-          container.innerHTML = '<p style="color:#888;">No match data found.</p>';
-          return;
-        }
-
-        /* filter competitive only, max 10 */
-        const matches = json.data
-          .filter(m => m.metadata.mode === 'Competitive')
-          .slice(0, 10);
-
-        if (!matches.length) {
-          container.innerHTML = '<center><p style="color:#888;">No competitive matches found in the last 10 games.</p></center>';
-          return;
-        }
-
-        const rows = matches.map(m => {
-          const meta = m.metadata;
-          const me   = m.players.all_players.find(p =>
-            p.name.toLowerCase() === 'kjxgaming' ||
-            p.puuid === '291f6370-dcb8-5332-b71f-088671d896b5'
-          );
-
-          const myTeam     = me ? me.team.toLowerCase() : null;
-          const won        = myTeam && m.teams[myTeam] ? m.teams[myTeam].has_won : null;
-          const result     = won === true ? 'WIN' : won === false ? 'LOSS' : '—';
-          const resultColor = result === 'WIN' ? '#4ade80' : result === 'LOSS' ? '#f87171' : '#aaa';
-
-          const kda   = me ? `${me.stats.kills} / ${me.stats.deaths} / ${me.stats.assists}` : '— / — / —';
-          const agent = me ? me.character : '—';
-          const acs   = me && meta.rounds_played > 0
-            ? Math.round(me.stats.score / meta.rounds_played)
-            : '—';
-
-          const date    = new Date(meta.game_start * 1000);
-          const dateStr = date.toLocaleDateString('en-GB', { day:'2-digit', month:'short' });
-
-          return `
-            <div class="match-row">
-              <span class="match-result" style="color:${resultColor}">${result}</span>
-              <span class="match-map">${meta.map}</span>
-              <span class="match-agent">${agent}</span>
-              <span class="match-kda">${kda}</span>
-              <span class="match-acs"><span class="valo-stat-label">ACS</span>&nbsp;${acs}</span>
-              <span class="match-date">${dateStr}</span>
-            </div>
-          `;
-        }).join('');
-
-        container.innerHTML = `
-          <div class="match-header">
-            <span>Result</span>
-            <span>Map</span>
-            <span>Agent</span>
-            <span>K / D / A</span>
-            <span>ACS</span>
-            <span>Date</span>
-          </div>
-          ${rows}
-        `;
-
-      } catch (e) {
-        container.innerHTML = '<p style="color:#888;">Could not load matches - rate limited or API error.</p>';
-      }
-    }
-
-    /* ── Toggle panel ──────────────────────────────────── */
-    function toggleMatches() {
-      const wrap = document.getElementById('matches-wrap');
-      const btn  = document.getElementById('matches-toggle-btn');
-
-      matchesOpen = !matchesOpen;
-
-      if (matchesOpen) {
-        wrap.classList.add('open');
-        btn.innerHTML = '&#9660;&nbsp; Hide Matches';
-        if (!matchesLoaded) {
-          matchesLoaded = true;
-          loadMatches();
-        }
-      } else {
-        wrap.classList.remove('open');
-        btn.innerHTML = '&#9654;&nbsp; Display Matches';
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadValorant);
-
-// Set favicon dynamically from pfp system API 
-
-(function () {
-  fetch("https://pfpsystem.itsnielsje.workers.dev/", {
-    headers: { "Accept": "application/json" }
-  })
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      if (!data.url) return;
-      var url = data.url;
-
-      function upsert(sel, tag, attrs) {
-        var el = document.querySelector(sel) || document.createElement(tag);
-        Object.keys(attrs).forEach(function (k) {
-          if (k === "href" || k === "content") el[k] = attrs[k];
-          else el.setAttribute(k, attrs[k]);
-        });
-        document.head.appendChild(el);
-      }
-
-      upsert("link[rel='icon']",             "link", { rel: "icon",             type: "image/png", href: url });
-      upsert("link[rel='shortcut icon']",    "link", { rel: "shortcut icon",    type: "image/png", href: url });
-      upsert("link[rel='apple-touch-icon']", "link", { rel: "apple-touch-icon",                   href: url });
-    })
-    .catch(function () { /* silent fail — fallback favicon stays */ });
-})();
-
-  </script>
+  <!-- Scripts -->
+  <script src="main.js"></script>
 
 </body>
 </html>
