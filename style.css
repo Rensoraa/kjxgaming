@@ -462,3 +462,37 @@ body::after {
     gap: 0.3rem;
   }
 }
+
+.hero-pfp-wrap {
+  position: relative;
+  width: 110px;
+  margin: 0 auto -2px; /* the -2px is what dips it into the card */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-pfp {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 42, 42, 0.5);
+  display: block;
+}
+
+.hero-pfp-glow {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.4), transparent 70%);
+  top: 0;
+  left: 0;
+  filter: blur(16px);
+  z-index: -1;
+}
+
+.card-hero {
+  overflow: visible;
+}
