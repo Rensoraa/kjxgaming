@@ -271,7 +271,7 @@ function loadMatches() {
   if (!container) return;
   container.innerHTML = '<p style="color:#555;font-size:0.85rem;padding:0.6rem 0;">Loading matches…</p>';
 
-  fetch('https://api.henrikdev.xyz/valorant/v3/matches/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df')
+  fetch('https://api.henrikdev.xyz/valorant/v3/matches/eu/FNC%20Kjxgaming/PRAY?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df')
     .then(function (res) { return res.json(); })
     .then(function (json) {
       if (!json.data) {
