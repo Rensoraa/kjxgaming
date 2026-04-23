@@ -203,7 +203,7 @@ function loadValorant() {
   var container = document.getElementById('valo-data');
   if (!container) return;
 
-  fetch('https://api.henrikdev.xyz/valorant/v2/mmr/eu/Kjxgaming/Echo?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df')
+  fetch('https://api.henrikdev.xyz/valorant/v2/mmr/eu/FNC%20Kjxgaming/PRAY?api_key=HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df')
     .then(function (res) { return res.json(); })
     .then(function (json) {
       if (!json.data || !json.data.current_data) {
