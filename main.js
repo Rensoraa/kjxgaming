@@ -291,7 +291,7 @@ function loadMatches() {
       var rows = matches.map(function (m) {
         var meta = m.metadata;
         var me   = m.players.all_players.find(function (p) {
-          return p.name.toLowerCase() === 'kjxgaming' ||
+          return p.name.toLowerCase() === 'FNC kjxgaming' ||
                  p.puuid === '291f6370-dcb8-5332-b71f-088671d896b5';
         });
         var myTeam      = me ? me.team.toLowerCase() : null;
