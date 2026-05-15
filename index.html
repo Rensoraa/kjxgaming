@@ -32,6 +32,136 @@
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 
+  <style>
+    /* =============================================
+       SPECS SECTION
+    ============================================= */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    @media (max-width: 560px) {
+      .specs-grid { grid-template-columns: 1fr; }
+    }
+
+    .spec-card {
+      background: rgba(255, 26, 26, 0.04);
+      border: 1px solid rgba(255, 26, 26, 0.14);
+      border-radius: 14px;
+      padding: 1.15rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spec-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,26,26,0.35), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .spec-card:hover {
+      border-color: rgba(255, 26, 26, 0.35);
+      background: rgba(255, 26, 26, 0.07);
+      transform: translateY(-3px);
+    }
+
+    .spec-card:hover::before { opacity: 1; }
+
+    .spec-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(255, 26, 26, 0.1);
+      border: 1px solid rgba(255, 26, 26, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spec-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: rgba(255, 100, 100, 0.9);
+    }
+
+    .spec-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .spec-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255, 80, 80, 0.7);
+    }
+
+    .spec-name {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #eee;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .spec-sub {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: #666;
+      margin-top: 0.1rem;
+    }
+
+    /* Full-width card for case */
+    .spec-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* Glow accent on CPU and GPU (hero components) */
+    .spec-card.hero-spec {
+      border-color: rgba(255, 26, 26, 0.22);
+      background: rgba(255, 26, 26, 0.06);
+    }
+
+    .spec-card.hero-spec .spec-icon {
+      background: rgba(255, 26, 26, 0.15);
+      border-color: rgba(255, 26, 26, 0.35);
+      box-shadow: 0 0 14px rgba(255, 0, 0, 0.2);
+    }
+
+    .spec-card.hero-spec .spec-icon svg {
+      filter: drop-shadow(0 0 4px rgba(255, 60, 60, 0.6));
+    }
+
+    .specs-note {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #444;
+      margin-top: 1.4rem;
+      letter-spacing: 0.06em;
+    }
+  </style>
+
   <!-- Scripts (defer = loads in parallel, runs after DOM is ready) -->
   <script src="main.js" defer></script>
 </head>
@@ -75,6 +205,7 @@
         <nav class="menu">
           <a href="#about"    class="glow-btn small">About</a>
           <a href="#valorant" class="glow-btn small">Valorant</a>
+          <a href="#specs"    class="glow-btn small">Specs</a>
         </nav>
       </div>
 
@@ -154,6 +285,93 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- ===================== SPECS ===================== -->
+    <section id="specs" class="glass hover-card animate-in" style="transition-delay:0.3s">
+      <h2 class="section-title">My Setup</h2>
+      <p class="section-desc">The rig behind the grind</p>
+
+      <div class="specs-grid">
+
+        <!-- CPU -->
+        <div class="spec-card hero-spec">
+          <div class="spec-icon">
+            <!-- CPU chip icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 3H7a2 2 0 0 0-2 2v2H3v2h2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2h2v-2h-2v-2h2V7h-2V5a2 2 0 0 0-2-2h-2V1h-2v2h-2V1H9v2zm6 14H9a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2zm-1-9h-4v4h4v-4z"/>
+            </svg>
+          </div>
+          <div class="spec-details">
+            <span class="spec-label">CPU</span>
+            <span class="spec-name">Ryzen 7 5700X</span>
+            <span class="spec-sub">8-core · 16-thread · 4.6 GHz</span>
+          </div>
+        </div>
+
+        <!-- GPU -->
+        <div class="spec-card hero-spec">
+          <div class="spec-icon">
+            <!-- GPU / graphics card icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6zm2 0v8h16V6H4zm2 1h2v2H6V7zm3 0h2v2H9V7zm3 0h2v2h-2V7zm3 0h2v2h-2V7zM6 16v2h2v-2H6zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"/>
+            </svg>
+          </div>
+          <div class="spec-details">
+            <span class="spec-label">GPU</span>
+            <span class="spec-name">RTX 5060</span>
+            <span class="spec-sub">NVIDIA GeForce · Blackwell</span>
+          </div>
+        </div>
+
+        <!-- Motherboard -->
+        <div class="spec-card">
+          <div class="spec-icon">
+            <!-- Motherboard / circuit board icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h16V5H4zm2 2h5v4H6V7zm0 5h5v5H6v-5zm6-5h6v3h-6V7zm0 4h6v6h-6v-6z"/>
+            </svg>
+          </div>
+          <div class="spec-details">
+            <span class="spec-label">Motherboard</span>
+            <span class="spec-name">MSI A520M PRO</span>
+            <span class="spec-sub">AM4 · Micro-ATX</span>
+          </div>
+        </div>
+
+        <!-- RAM -->
+        <div class="spec-card">
+          <div class="spec-icon">
+            <!-- RAM / memory stick icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8zm2 0v8h16V8H4zm1 1h2v2H5V9zm3 0h2v2H8V9zm3 0h2v2h-2V9zm3 0h2v2h-2V9zm3 0h2v2h-2V9zM5 13h2v2H5v-2zm3 0h2v2H8v-2zm3 0h2v2h-2v-2zm3 0h2v2h-2v-2zm3 0h2v2h-2v-2z"/>
+            </svg>
+          </div>
+          <div class="spec-details">
+            <span class="spec-label">RAM</span>
+            <span class="spec-name">32 GB DDR4</span>
+            <span class="spec-sub">Samsung rebrand · dual channel</span>
+          </div>
+        </div>
+
+        <!-- Case — full width -->
+        <div class="spec-card full-width">
+          <div class="spec-icon">
+            <!-- PC case / tower icon -->
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H5zm0 2h14v16H5V4zm2 1v4h10V5H7zm0 5v2h2v-2H7zm0 3v2h2v-2H7zm4-3v2h2v-2h-2zm0 3v2h2v-2h-2zm4-3v2h2v-2h-2zm0 3v2h2v-2h-2zm-8 3v2h6v-2H7z"/>
+            </svg>
+          </div>
+          <div class="spec-details">
+            <span class="spec-label">Case</span>
+            <span class="spec-name">MSI MAG Forge M100R</span>
+            <span class="spec-sub">Mid Tower · Tempered Glass · ARGB</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="specs-note">// I'll update this when something changes!</p>
     </section>
 
   </main>
